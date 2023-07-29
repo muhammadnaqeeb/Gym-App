@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gym_registration/view/screens/home_screen.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
+import '../../constants/constants.dart';
+
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final TextEditingController nameController = TextEditingController();
@@ -78,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          HomeScreen(),
+                                          const HomeScreen(),
                                     ),
                                   );
                                 } else {
@@ -90,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                                         reverseAnimation:
                                             StyledToastAnimation.fade,
                                         position: StyledToastPosition.top,
-                                        backgroundColor: Colors.purple,
+                                        backgroundColor: kPrimaryColor,
                                         borderRadius:
                                             BorderRadius.circular(50.0));
                                   } else {
@@ -100,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                                         reverseAnimation:
                                             StyledToastAnimation.fade,
                                         position: StyledToastPosition.top,
-                                        backgroundColor: Colors.purple,
+                                        backgroundColor: kPrimaryColor,
                                         borderRadius:
                                             BorderRadius.circular(20.0));
                                   }

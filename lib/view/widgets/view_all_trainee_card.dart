@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_registration/view/screens/all_trainee_screen.dart';
 
 import '../../constants/constants.dart';
 
@@ -62,7 +63,12 @@ class ViewAllTraineeCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        print('View all trainee click');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ViewAllTraineeScreen(),
+          ),
+        );
       },
     );
   }

@@ -52,7 +52,7 @@ class RegisterTraineeCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => RegisterNewTraineeScreen(),
+            builder: (context) => const RegisterNewTraineeScreen(),
           ),
         );
       },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
+import '../screens/register_new_trainee_screen.dart';
 
 class RegisterTraineeCard extends StatelessWidget {
   const RegisterTraineeCard({
@@ -48,7 +49,12 @@ class RegisterTraineeCard extends StatelessWidget {
             ]),
       ),
       onTap: () {
-        print("Reister new trainee click");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RegisterNewTraineeScreen(),
+          ),
+        );
       },
     );
   }

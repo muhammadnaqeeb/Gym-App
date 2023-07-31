@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_registration/view/screens/home_screen.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:gym_registration/view/widgets/primary_button.dart';
 
 import '../../constants/constants.dart';
 
@@ -72,58 +73,44 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(height: 30),
                           SizedBox(
                             width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (nameController.text == "naqeeb" &&
-                                    passwordController.text == "123456") {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const HomeScreen(),
-                                    ),
-                                  );
-                                } else {
-                                  if (nameController.text == "" ||
-                                      passwordController.text == "") {
-                                    showToast('Please enter value in textfield',
-                                        context: context,
-                                        animation: StyledToastAnimation.fade,
-                                        reverseAnimation:
-                                            StyledToastAnimation.fade,
-                                        position: StyledToastPosition.top,
-                                        backgroundColor: kPrimaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(50.0));
+                            child: PrimaryButton(
+                                text: "Login",
+                                onPress: () {
+                                  if (nameController.text == "naqeeb" &&
+                                      passwordController.text == "123456") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const HomeScreen(),
+                                      ),
+                                    );
                                   } else {
-                                    showToast('Invalid Credentials ',
-                                        context: context,
-                                        animation: StyledToastAnimation.fade,
-                                        reverseAnimation:
-                                            StyledToastAnimation.fade,
-                                        position: StyledToastPosition.top,
-                                        backgroundColor: kPrimaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(20.0));
+                                    if (nameController.text == "" ||
+                                        passwordController.text == "") {
+                                      showToast(
+                                          'Please enter value in textfield',
+                                          context: context,
+                                          animation: StyledToastAnimation.fade,
+                                          reverseAnimation:
+                                              StyledToastAnimation.fade,
+                                          position: StyledToastPosition.top,
+                                          backgroundColor: kPrimaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(50.0));
+                                    } else {
+                                      showToast('Invalid Credentials ',
+                                          context: context,
+                                          animation: StyledToastAnimation.fade,
+                                          reverseAnimation:
+                                              StyledToastAnimation.fade,
+                                          position: StyledToastPosition.top,
+                                          backgroundColor: kPrimaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(20.0));
+                                    }
                                   }
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                ),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16.0),
-                              ),
-                              child: const Text(
-                                'Log In',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                                }),
                           ),
                           const SizedBox(height: 5),
                           TextButton(

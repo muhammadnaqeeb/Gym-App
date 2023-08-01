@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_registration/view/screens/home_screen.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:gym_registration/view/widgets/primary_button.dart';
 
 import '../../constants/constants.dart';
@@ -88,26 +88,14 @@ class LoginScreen extends StatelessWidget {
                                   } else {
                                     if (nameController.text == "" ||
                                         passwordController.text == "") {
-                                      showToast(
-                                          'Please enter value in textfield',
-                                          context: context,
-                                          animation: StyledToastAnimation.fade,
-                                          reverseAnimation:
-                                              StyledToastAnimation.fade,
-                                          position: StyledToastPosition.top,
-                                          backgroundColor: kPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(50.0));
+                                      Fluttertoast.showToast(
+                                          msg:
+                                              'Please enter value in textfield',
+                                          backgroundColor: kPrimaryColor);
                                     } else {
-                                      showToast('Invalid Credentials ',
-                                          context: context,
-                                          animation: StyledToastAnimation.fade,
-                                          reverseAnimation:
-                                              StyledToastAnimation.fade,
-                                          position: StyledToastPosition.top,
-                                          backgroundColor: kPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0));
+                                      Fluttertoast.showToast(
+                                          msg: 'Invalid Credentials ',
+                                          backgroundColor: kPrimaryColor);
                                     }
                                   }
                                 }),

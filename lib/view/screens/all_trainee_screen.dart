@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constants.dart';
@@ -5,6 +6,8 @@ import '../../constants/constants.dart';
 class ViewAllTraineeScreen extends StatelessWidget {
   ViewAllTraineeScreen({super.key});
   final TextEditingController searchController = TextEditingController();
+  final CollectionReference _traineeCollection =
+      FirebaseFirestore.instance.collection("Trainee");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,18 +53,31 @@ class ViewAllTraineeScreen extends StatelessWidget {
             height: 10,
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: 30,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    child: Text(index.toString()),
-                  ),
-                  title: const Text("Muhammad Naqeeb"),
-                  subtitle: const Text("0300 5039834"),
-                  onTap: () {},
+            child: StreamBuilder(
+              stream: _traineeCollection.snapshots(),
+              builder: ((context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                if (streamSnapshot.hasData) {
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: streamSnapshot.data!.docs.length,
+                    itemBuilder: ((context, index) {
+                      final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          child: Text("${index + 1}"),
+                        ),
+                        title: Text(documentSnapshot['name']),
+                        subtitle: Text(documentSnapshot['phone']),
+                        onTap: () {},
+                      );
+                    }),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              },
+              }),
             ),
           )
         ],

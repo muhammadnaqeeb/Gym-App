@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_registration/controller/firebase/firestore_methods.dart';
 import 'package:gym_registration/view/widgets/custom_textfield.dart';
 import 'package:gym_registration/view/widgets/primary_button.dart';
+
+import '../../constants/constants.dart';
 
 class RegisterNewTraineeScreen extends StatefulWidget {
   const RegisterNewTraineeScreen({super.key});
@@ -19,6 +23,55 @@ class _RegisterNewTraineeScreenState extends State<RegisterNewTraineeScreen> {
   final TextEditingController feeController = TextEditingController();
 
   bool isCardio = false;
+  bool isLoading = false;
+  registerTrainee() async {
+    if (nameController.text == "" ||
+        weightController.text == "" ||
+        phoneController.text == "" ||
+        registrationFeeController.text == "" ||
+        feeController.text == "") {
+      Fluttertoast.showToast(
+          msg: 'Please Enter All fields', backgroundColor: kPrimaryColor);
+
+      return;
+    }
+    if (registrationFeeController.text.contains(".") ||
+        feeController.text.contains(".")) {
+      Fluttertoast.showToast(
+          msg: 'Fee should not be decimal number',
+          backgroundColor: kPrimaryColor);
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+    String res = await FirestoreMethods().registerTrainee(
+      name: nameController.text,
+      phone: phoneController.text,
+      gender: true,
+      isCardio: isCardio,
+      registrationFee: int.parse(registrationFeeController.text),
+      weight: double.parse(weightController.text),
+      fee: int.parse(feeController.text),
+    );
+    if (res == "success") {
+      Fluttertoast.showToast(
+          msg: 'Trainee successfully added', backgroundColor: kPrimaryColor);
+
+      nameController.text = "";
+      weightController.text = "";
+      phoneController.text = "";
+      registrationFeeController.text = "";
+      feeController.text = "";
+    } else {
+      Fluttertoast.showToast(
+          msg: "Error occurs $res", backgroundColor: kPrimaryColor);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +173,15 @@ class _RegisterNewTraineeScreenState extends State<RegisterNewTraineeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                  width: double.infinity,
-                  child: PrimaryButton(text: "Register", onPress: () {})),
+              isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : SizedBox(
+                      width: double.infinity,
+                      child: PrimaryButton(
+                        text: "Register",
+                        onPress: registerTrainee,
+                      ),
+                    ),
               const SizedBox(
                 height: 10,
               ),

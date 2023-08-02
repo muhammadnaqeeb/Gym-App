@@ -5,6 +5,8 @@ import 'package:gym_registration/constants/constants.dart';
 import 'package:gym_registration/controller/firebase/firestore_methods.dart';
 import 'package:gym_registration/view/widgets/primary_button.dart';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:uuid/uuid.dart';
 
 class TraineeDetailScreen extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -159,6 +161,17 @@ class _TraineeDetailScreenState extends State<TraineeDetailScreen> {
                           ),
                           subtitle:
                               Text("${documentSnapshotPayment['amount_paid']}"),
+                          trailing: IconButton(
+                              onPressed: () {
+                                String payID = const Uuid().v4();
+                                String dateOfFeePay = DateFormat.yMMMd().format(
+                                  documentSnapshotPayment['payment_date']
+                                      .toDate(),
+                                );
+                                Share.share(
+                                    '*FJ Power House*\n \n*Pay ID:* $payID\n*Name:* ${widget.documentSnapshot['name']} \n*Amount*: ${documentSnapshotPayment['amount_paid']}\n*Date:* $dateOfFeePay');
+                              },
+                              icon: const Icon(Icons.share)),
                         );
                       }),
                     );

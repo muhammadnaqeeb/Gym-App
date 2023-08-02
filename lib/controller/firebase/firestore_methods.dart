@@ -45,4 +45,39 @@ class FirestoreMethods {
     }
     return res;
   }
+
+  Future<String> addFee({
+    required String traineeID,
+    required int amountPaid,
+  }) async {
+    String res = "some error";
+
+    try {
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection("Fee_Payment")
+          .where("traineeID", isEqualTo: traineeID)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot documentSnapshot = querySnapshot.docs[0];
+
+        // Create a map with the fields you want to update and their new values
+        Map<String, dynamic> updatedData = {
+          'amount_paid': amountPaid,
+          'payment_date': DateTime.now()
+        };
+
+        // Perform the update using the update method
+        await documentSnapshot.reference.update(updatedData);
+
+        res = "success";
+      } else {
+        res = "No Doc found error";
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+
+    return res;
+  }
 }

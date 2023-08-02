@@ -1,13 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gym_registration/view/screens/trainee_details_screen.dart';
 
 import '../../constants/constants.dart';
 
-class ViewAllTraineeScreen extends StatelessWidget {
+class ViewAllTraineeScreen extends StatefulWidget {
   ViewAllTraineeScreen({super.key});
+
+  @override
+  State<ViewAllTraineeScreen> createState() => _ViewAllTraineeScreenState();
+}
+
+class _ViewAllTraineeScreenState extends State<ViewAllTraineeScreen> {
   final TextEditingController searchController = TextEditingController();
-  final CollectionReference _traineeCollection =
-      FirebaseFirestore.instance.collection("Trainee");
+
+  final Stream<QuerySnapshot<Map<String, dynamic>>> _traineeCollection =
+      FirebaseFirestore.instance
+          .collection("Trainee")
+          .orderBy("name")
+          .snapshots();
+
+  bool isShowUsers = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +41,12 @@ class ViewAllTraineeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
             child: TextField(
-              onChanged: (value) {},
-              //controller: searchController,
+              controller: searchController,
+              onSubmitted: (_) {
+                setState(() {
+                  isShowUsers = true;
+                });
+              },
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.transparent),
@@ -54,7 +72,7 @@ class ViewAllTraineeScreen extends StatelessWidget {
           ),
           Expanded(
             child: StreamBuilder(
-              stream: _traineeCollection.snapshots(),
+              stream: _traineeCollection,
               builder: ((context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                 if (streamSnapshot.hasData) {
                   return ListView.builder(
@@ -63,13 +81,24 @@ class ViewAllTraineeScreen extends StatelessWidget {
                     itemBuilder: ((context, index) {
                       final DocumentSnapshot documentSnapshot =
                           streamSnapshot.data!.docs[index];
+
                       return ListTile(
                         leading: CircleAvatar(
                           child: Text("${index + 1}"),
                         ),
                         title: Text(documentSnapshot['name']),
                         subtitle: Text(documentSnapshot['phone']),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  TraineeDetailScreen(
+                                documentSnapshot: documentSnapshot,
+                              ),
+                            ),
+                          );
+                        },
                       );
                     }),
                   );

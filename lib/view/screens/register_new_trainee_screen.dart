@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_registration/constants/extension.dart';
 import 'package:gym_registration/controller/firebase/firestore_methods.dart';
 import 'package:gym_registration/view/widgets/custom_textfield.dart';
 import 'package:gym_registration/view/widgets/primary_button.dart';
@@ -47,7 +48,7 @@ class _RegisterNewTraineeScreenState extends State<RegisterNewTraineeScreen> {
       isLoading = true;
     });
     String res = await FirestoreMethods().registerTrainee(
-      name: nameController.text,
+      name: nameController.text.capitalize(),
       phone: phoneController.text,
       gender: true,
       isCardio: isCardio,

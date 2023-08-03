@@ -30,7 +30,7 @@ class TotalTraineeCard extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            "510",
+            "156",
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w500,

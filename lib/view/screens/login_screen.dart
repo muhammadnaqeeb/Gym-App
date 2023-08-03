@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/background.jpg'),
+                image: AssetImage('assets/images/login.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -30,11 +30,11 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 100),
-                  const Icon(
-                    Icons.fitness_center_rounded,
-                    size: 80,
-                    color: Colors.white70,
-                  ),
+                  // const Icon(
+                  //   Icons.fitness_center_rounded,
+                  //   size: 80,
+                  //   color: Colors.white70,
+                  // ),
                   Card(
                     color: Colors.white.withOpacity(0.80),
                     elevation: 8,

@@ -20,6 +20,12 @@ dependencies:
   fluttertoast: ^8.2.2
   intl: ^0.18.1
   share_plus: ^7.0.2
+  flutter_native_splash: ^2.2.19
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "assets/images/background.png"
+  web: false
 
 dev_dependencies:
   flutter_test:

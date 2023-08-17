@@ -21,10 +21,10 @@ class ViewAllTraineeCard extends StatelessWidget {
             kBoxShadow,
           ],
         ),
-        child: Column(
+        child: const Column(
           children: [
             Row(
-              children: const [
+              children: [
                 Icon(Icons.all_inclusive_rounded),
                 SizedBox(
                   width: 10,
@@ -35,16 +35,16 @@ class ViewAllTraineeCard extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               "This include all the trainee including weight lifting and cardio",
             ),
-            const Spacer(),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
+              children: [
                 Text(
                   "see all",
                   style: TextStyle(color: kPrimaryColor),
@@ -66,7 +66,7 @@ class ViewAllTraineeCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ViewAllTraineeScreen(),
+            builder: (context) => const ViewAllTraineeScreen(),
           ),
         );
       },

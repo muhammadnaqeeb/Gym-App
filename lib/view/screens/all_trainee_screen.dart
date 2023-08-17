@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_registration/view/screens/trainee_details_screen.dart';
 
-import '../../constants/constants.dart';
-
 class ViewAllTraineeScreen extends StatefulWidget {
-  ViewAllTraineeScreen({super.key});
+  const ViewAllTraineeScreen({super.key});
 
   @override
   State<ViewAllTraineeScreen> createState() => _ViewAllTraineeScreenState();

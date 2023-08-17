@@ -22,9 +22,9 @@ class RegisterTraineeCard extends StatelessWidget {
             kBoxShadow,
           ],
         ),
-        child: Column(
+        child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Icon(
                 Icons.edit,
                 color: Colors.white,

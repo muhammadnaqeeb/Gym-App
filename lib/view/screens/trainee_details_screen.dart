@@ -129,7 +129,7 @@ class _TraineeDetailScreenState extends State<TraineeDetailScreen> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: Text(
-                "Last Fee Payment",
+                "Fee Payment Record",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -137,7 +137,7 @@ class _TraineeDetailScreenState extends State<TraineeDetailScreen> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 210,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("Fee_Payment")
@@ -159,8 +159,8 @@ class _TraineeDetailScreenState extends State<TraineeDetailScreen> {
                               documentSnapshotPayment['payment_date'].toDate(),
                             ),
                           ),
-                          subtitle:
-                              Text("${documentSnapshotPayment['amount_paid']}"),
+                          subtitle: Text(
+                              "Rs. ${documentSnapshotPayment['amount_paid']}"),
                           trailing: IconButton(
                               onPressed: () {
                                 String payID = const Uuid().v4();
